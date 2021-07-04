@@ -1,0 +1,55 @@
+﻿@using AspNet.VueJs.Sample.Application.Config
+
+<section class="myDocuments" id="v-onboarding-overview" v-cloak>
+    <loading-spinner v-bind:hide-spinner="model.hideSpinner"></loading-spinner>
+    <div class="container">
+        @{Html.AntiForgeryToken();}
+
+        <overview-search-component v-bind:view-model="model" ref="search"></overview-search-component>
+
+        <overview-table-component v-bind:view-model="model" ref="table"></overview-table-component>
+    </div>
+</section>
+
+<partial name="_search" />
+<partial name="_table" />
+<partial name="_spinner" />
+@section PageCss {
+    <link href="~/css/vendors/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="~/css/vendors/bootstrap-material-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/css/vendors/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/css/pages/onboardingoverviews.min.css" rel="stylesheet" />
+    <link href="~/css/vendors/jquery-ui.css" rel="stylesheet" />
+}
+
+@section Scripts
+    {
+    <script src="@Url.Content("~/js/vendors/jquery-ui.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/jquery.sidr.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/datatable/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/datatable/dataTables.bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/datatable/jquery.bootpag.js")"></script>
+    <script src="@Url.Content("~/js/vendors/datatable/plug-ins/dataRender/datetime.js")"></script>
+    <script src="@Url.Content("~/js/vendors/toastr/toastr.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/vue/vue.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/moment-with-locales.min.js")"></script>
+
+    <script src="@Url.Content("~/js/pages/shared/date-picker.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/shared/notification.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/shared/spinner.js")" asp-append-version="true"></script>
+
+    <script src="@Url.Content("~/js/pages/onboarding/step-common-mixin.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/onboarding/overview/overview-search.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/onboarding/overview/overview-table.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/onboarding/overview/overview-vue.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/onboarding/overview/overview-controller.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/common.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/layout.js")" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            overviewController.init('@DomainServiceEndPointsConfig.RelativePath', notification.init());
+        });
+    </script>
+}

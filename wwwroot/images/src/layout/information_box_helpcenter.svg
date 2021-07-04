@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>onboarding_information_box_helpcenter_white</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-180.000000, -99.000000)" fill="#00B263" fill-rule="nonzero">
+            <g id="onboarding_information_box_helpcenter_white" transform="translate(180.000000, 99.000000)">
+                <rect id="Rectangle-2" opacity="0" x="0" y="0" width="20" height="20"></rect>
+                <path d="M10.4104,16 C9.7088,16 9.2,15.5128 9.2,14.7976 C9.2,14.1096 9.7344,13.6 10.4104,13.6 C11.088,13.6 11.6,14.1168 11.6,14.7976 C11.6,15.4944 11.1008,16 10.4104,16 Z M6,7.2648 C6,5.2264 8.2008,4 10.096,4 C12.0104,4 14,5.0608 14,7.1184 C14,9.54 11.288,9.6488 10.7672,11.9704 C10.548,13.144 8.8312,13.0808 8.8312,11.7272 C8.8312,9.1488 11.7992,8.6976 11.7992,7.1344 C11.7992,6.2024 10.9968,5.6488 10.0952,5.6488 C8.8736,5.6488 8.452,6.316 8.0968,7.3608 C7.6456,8.8088 6,8.2768 6,7.2648 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

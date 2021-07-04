@@ -1,0 +1,46 @@
+﻿@using AspNet.VueJs.Sample.Application.Config
+
+<section class="myDocuments" id="v-onboarding-details" v-cloak>
+    <loading-spinner v-bind:hide-spinner="model.hideSpinner"></loading-spinner>
+    <div class="container">
+        @{Html.AntiForgeryToken();}
+
+        <details-documents-component v-bind:view-model="model" ref="documents"></details-documents-component>
+
+        <details-comments-component v-bind:view-model="model" ref="comments"></details-comments-component>
+    </div>
+</section>
+
+<partial name="_documents" />
+<partial name="_comments" />
+<partial name="_spinner" />
+@section PageCss
+    {
+    <link href="~/css/pages/onboardingdetails.min.css" rel="stylesheet" />
+    <link href="~/css/vendors/toastr/toastr.min.css" rel="stylesheet" />
+}
+
+@section Scripts
+    {
+    <script src="@Url.Content("~/js/vendors/jquery-ui.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/toastr/toastr.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/moment-with-locales.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/vue/vue.min.js")"></script>
+    <script src="@Url.Content("~/js/vendors/vue/vee-validate.full.min.js")"></script>
+
+    <script src="@Url.Content("~/js/pages/shared/notification.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/shared/spinner.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/shared/validations.js")" asp-append-version="true"></script>
+
+    <script src="@Url.Content("~/js/pages/onboarding/step-common-mixin.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/onboarding/details/documents.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/onboarding/details/comments.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/onboarding/details/details-vue.js")" asp-append-version="true"></script>
+    <script src="@Url.Content("~/js/pages/onboarding/details/details-controller.js")" asp-append-version="true"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            detailsController.init('@Model', '@DomainServiceEndPointsConfig.RelativePath', notification.init());
+        });
+    </script>
+
+}

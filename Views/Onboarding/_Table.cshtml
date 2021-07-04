@@ -1,0 +1,43 @@
+﻿<script type="text/x-template" id="overview-table-component-template">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="contentPanel">
+                <div class="panel">
+                    <table id="tbl-contract-overview" class="table display stripe order-column">
+                        <thead>
+                            <tr>
+                                <th cy-data="onboarding-header-contract-name" v-on:click="toggleSorting('ContractName')">Contractnaam</th>
+                                <th cy-data="onboarding-header-contract-number" v-on:click="toggleSorting('ContractFid')">Contractnummer</th>
+                                <th cy-data="onboarding-header-advice-type" v-on:click="toggleSorting('AdvisingType')">Adviestype</th>
+                                <th cy-data="onboarding-header-internal-contract-person" v-on:click="toggleSorting('InternalContactPerson')">Interne contactpersoon</th>
+                                <th cy-data="onboarding-header-status" v-on:click="toggleSorting('StatusDescription')">Status</th>
+                                <th cy-data="onboarding-header-last-update" v-on:click="toggleSorting('StatusUpdatedOn')">Laatste wijziging</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <label id="show-text">Show</label>
+                                    <select id="ddl-show" v-model="viewModel.pageSize" v-on:change="paging">
+                                        <option v-for="page in viewModel.pages"
+                                                :key="page"
+                                                :value="page">
+                                            {{ page }}
+                                        </option>
+                                    </select>
+                                    <label id="entries-text">entries</label>
+                                </td>
+                                <td><label id="show-entries"></label></td>
+                                <td align="right">
+                                    <div id="page-selection"></div>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,88 @@
+﻿@using AspNet.VueJs.Sample.Web.Extensions
+@{
+    var UserName = HttpCurrentContext.UserName;
+}
+<header>
+    <nav class="topBar">
+        <div class="container">
+            <div class="logoWrapper">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="@Url.Content("~/images/dist/logos/header_logo.svg")" width="63" alt="BrandNewDay Logo">
+                </a>
+            </div>
+            <div class="navMenu">
+                <ul>
+                    <li><a href='@Url.Action("Index", "Onboarding")' title="Onboarding">Overview</a></li>
+                </ul>
+            </div>
+            <div class="dropdownWrapper">
+                <div class="dropdownButton">
+                    <div class="userImage"></div>
+                    <div class="openActionsBadge"></div>
+                    <span class="timeGreeting"></span>
+                    <span class="userName">@UserName</span>
+                    <div class="menuCaret"></div>
+                </div>
+                <div class="sideMenuOpenButton">
+                    <div class="userImage"></div>
+                    <span>MENU</span>
+                </div>
+                <div class="dropdownContent">
+                    <ul>
+                        <li class="menuTitle">
+                            <div class="sideMenuCloseButton">
+                                <div class="userImage"></div>
+                                <span>SLUIT</span>
+                            </div>
+                            <span class="timeGreeting"></span>
+                            <span class="userName">@UserName</span>
+                        </li>
+                        <li class="logoutParent menuItemInitState"><a class="logout" href='#'>Uitloggen</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="bottomBar">
+        <div class="container">
+            <div class="scrollingLinesWrapper">
+                <div class="scrollingLines">
+                    <div></div>
+                </div>
+                <div class="scrollingLines">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="scrollingLinesWrapper">
+                <div class="scrollingLines">
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="scrollingLines">
+                    <div></div>
+                </div>
+            </div>
+            <div class="navTitle">
+                <div class="leftMenuWrapper">
+                    <div class="leftMenuButton">
+                        <span class="line"></span>
+                        <span class="line"></span>
+                        <span class="line"></span>
+                    </div>
+                </div>
+                <div class="textWrapper">
+                    <h2 id="page-title"></h2>
+                </div>
+                <div class="rightActionButton pull-right">
+                    <a href="" class="button primary next">
+                        <span>Upload</span>
+                        <span>een document</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+

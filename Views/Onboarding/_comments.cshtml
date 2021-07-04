@@ -1,0 +1,48 @@
+﻿<script type="text/x-template" id="details-comments-component-template">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="contentPanel">
+                <div class="panel">
+                    <div class="commentTitle">Opmerkingen</div>
+                    <div id="onboarding-comments" class="row">
+                        <div class="col-md-6">
+                            <div class="commentContainer">
+                                <ul class="media-list">
+                                    <li v-for="(comment, index) in comments" class="media">
+                                        <div v-bind:id="'comment-' + comment.onboardingCommentId" class="media-body">
+                                            <span class="text-muted pull-right">
+                                                <small cy-data="onobarding-comment-created-date" class="text-muted">{{ comment.createdDate | formatDate }}</small>
+                                            </span>
+                                            <strong cy-data="onobarding-comment-created-by" class="text-success">{{ comment.createdBy }}</strong>
+                                            <p cy-data="onboarding-comment-value" style="white-space: pre-line">
+                                                {{ comment.comment }}
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <ValidationObserver ref="observer" v-slot="{ invalid }">
+                            <div class="col-md-6">
+                                <ValidationProvider rules="required" v-slot="{ errors }">
+                                    <div class="form-group" v-bind:class="{'has-error': errors.length}">
+                                        <textarea id="comment-input-textarea" placeholder="Vul hier je opmerking in..." class="commentArea" v-model.trim="comment.text" :maxlength="comment.max"></textarea>
+                                    </div>
+                                </ValidationProvider>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <span v-text="(comment.max - comment.text.length)"></span> karakters resterend
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button id="comment-submit-button" class="button primary next" v-on:click="saveComment"><span>Opslaan</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ValidationObserver>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

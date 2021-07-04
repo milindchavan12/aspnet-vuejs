@@ -1,0 +1,268 @@
+﻿<script type="text/x-template" id="details-documents-component-template">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="contentPanel">
+                <div class="panel">
+                    <div class="row">
+                        <div id="onboarding-details" class="col-md-5">
+                            <table class="table noborder">
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-status">Status:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <span id="onboarding-status">{{ model.onboardingStatus }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="ddl-version">Laatste wijziging:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <select id="ddl-version" class="form-control" v-model="selectedVersionId" v-on:change="getVersionDetails">
+                                                <option v-for="version in versionsLookup"
+                                                        :key="version.onboardingVersionId"
+                                                        :value="version.onboardingVersionId">
+                                                    {{ version.validFrom | formatDate }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-internal-contact-person">Interne contactpersoon:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <span id="onboarding-internal-contact-person">{{ model.internalContactPerson }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-advising-type">Adviestype:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <span id="onboarding-advising-type">{{ model.advisingType }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-agent-office">Advieskantoor:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <span id="onboarding-agent-office">{{ model.agentOffice }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-start-date">Ingangsdatum:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <span id="onboarding-start-date">{{ model.startDate | formatDate}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-commercial-decision-required">Commercieel besluit nodig:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <span id="onboarding-commercial-decision-required">{{ model.isCommercialDecisionRequired | formatRequiredDecision }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-backservice-required">Inhaalstorting benodigd?</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <span id="onboarding-backservice-required">{{ model.isBackserviceRequired | formatRequiredDecision }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-sales-transfer-done">Sales overdracht gedaan?</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <span id="onboarding-sales-transfer-done">{{ model.isSalesTransferDone | formatRequiredDecision }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-row">
+                                            <label for="onboarding-status-id">Status aanpassen:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-row">
+                                            <select id="onboarding-status-id" class="form-control" v-model="model.onboardingStatusId" :disabled="editDisabled">
+                                                <option :value="0" class="placeholder">Selecteer</option>
+                                                <option v-for="status in onboardingStatusesLookup"
+                                                        :key="status.key"
+                                                        :value="status.key">
+                                                    {{ status.value }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="col-md-6 col-lg-offset-1">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#">Documenten</a>
+                                </li>
+                            </ul>
+
+                            <div class="tabset" name="tabDocuments">
+                                <div id="onboarding-documents" class="tab">
+                                    <table class="table">
+                                        <tr>
+                                            <td>
+                                                <div class="table-row">
+                                                    <label for="onboarding-intention-declaration" class="checkbox">
+                                                        <span>Opdracht tot uitvoering</span>
+                                                        <input type="checkbox" id="onboarding-intention-declaration" v-model="model.intentionDeclaration" :disabled="editDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-kvk-extract" class="checkbox">
+                                                        <span>Uittreksel KvK</span>
+                                                        <input type="checkbox" id="onboarding-kvk-extract" v-model="model.kvkExtract" :disabled="editDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-copy-id" class="checkbox">
+                                                        <span>Kopie ID</span>
+                                                        <input type="checkbox" id="onboarding-copy-id" v-model="model.copyId" :disabled="editDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-backservice" class="checkbox">
+                                                        <span>Inhaalstorting</span>
+                                                        <input type="checkbox" id="onboarding-backservice" v-model="model.backservice" :disabled="isBackserviceDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-backservice-disclaimer" class="checkbox">
+                                                        <span>Inhaalstorting Disclaimer</span>
+                                                        <input type="checkbox" id="onboarding-backservice-disclaimer" v-model="model.backserviceDisclaimer" :disabled="isBackserviceDisclaimerDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-authorization" class="checkbox">
+                                                        <span>Machtiging</span>
+                                                        <input type="checkbox" id="onboarding-authorization" v-model="model.authorization" :disabled="editDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-row">
+                                                    <label for="onboarding-bpf-check" class="checkbox">
+                                                        <span>BPF Check</span>
+                                                        <input type="checkbox" id="onboarding-bpf-check" v-model="model.bpfCheck" :disabled="isAdvisingTypeDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-knowledge-and-experience-test" class="checkbox">
+                                                        <span>Kennis- en ervaringstoets</span>
+                                                        <input type="checkbox" id="onboarding-knowledge-and-experience-test" v-model="model.knowledgeAndExperienceTest" :disabled="isAdvisingTypeDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-participant-file" class="checkbox">
+                                                        <span>Deelnemersbestand</span>
+                                                        <input type="checkbox" id="onboarding-participant-file" v-model="model.participantFile" :disabled="editDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-foreign-declaration" class="checkbox">
+                                                        <span>Buitenlandverklaring</span>
+                                                        <input type="checkbox" id="onboarding-foreign-declaration" v-model="model.foreignDeclaration" :disabled="editDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                                <div class="table-row" v-if="model.foreignDeclaration">
+                                                    <select id="onboarding-foreignDeclaration-id" class="form-control" v-model="model.foreignDeclarationId" :disabled="editDisabled">
+                                                        <option :value="0" class="placeholder">Selecteer</option>
+                                                        <option v-for="foreignDeclaration in foreignDeclarationsLookup"
+                                                                :key="foreignDeclaration.key"
+                                                                :value="foreignDeclaration.key">
+                                                            {{ foreignDeclaration.value }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-sepa-form" class="checkbox">
+                                                        <span>SEPA formulier</span>
+                                                        <input type="checkbox" id="onboarding-sepa-form" v-model="model.sepaForm" :disabled="editDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <div v-if="model.sepaForm" id="onboarding-bic-code" class="form-control">{{ model.bicCode }}</div>
+                                                </div>
+                                                <div class="table-row">
+                                                    <label for="onboarding-commercial-decision" class="checkbox">
+                                                        <span>Commercieel besluit</span>
+                                                        <input type="checkbox" id="onboarding-commercial-decision" v-model="model.commercialDecision" :disabled="isCommercialDecisionDisabled">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="button primary next" id="onboarding-save-details" v-on:click="saveDetails" :disabled="editDisabled"><span>Opslaan</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

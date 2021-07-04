@@ -1,0 +1,94 @@
+﻿<script type="text/x-template" id="overview-search-component-template">
+    <div class="row">
+        <div id="toggle-filter" class="draggableButtonWrapper" type="button" v-on:click="toggleFilter">
+            <div class="draggableButton">
+                <div class="icon filter"></div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="contentPanel" v-if="viewModel.isFilterable">
+                <div class="panel">
+                    <div class="form-group row has-feedback">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input id="contract-search" type="text" class="form-control" v-model="viewModel.textSearch" v-on:keyup.enter="search"
+                                       placeholder="Zoek hier contractnummer of contractnaam ...">
+                                <span id="contract-search-clear" v-if="viewModel.contractSearch.length"
+                                      v-on:click="clearTextSearch"
+                                      class="glyphicon glyphicon-remove form-control-feedback clear"
+                                      uib-tooltip="clear">
+                                </span>
+                                <button id="btn-contract-search" class="input-group-addon button primary search" type="button" v-on:click="search"></button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group center">
+                                <button id="btn-clear-filter" class="button secondary" type="button" v-on:click="clearFilters">Clear Filters</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label>Datum laatste wijziging</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <date-picker class="form-control margin-right-md" v-bind:value="viewModel.dateFrom" v-on:update-date="searchFrom" date-format="dd-mm-yy"></date-picker>
+                                <date-picker class="form-control margin-right-md" v-bind:value="viewModel.dateTo" v-on:update-date="searchTo"  date-format="dd-mm-yy"></date-picker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label class="checkbox">
+                                Akkoord
+                                <input id="filter-status-accepted" type="checkbox" v-model="viewModel.status.accepted" v-on:change="search">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="checkbox">
+                                Handtekening
+                                <input id="filter-status-signed" type="checkbox" v-model="viewModel.status.signed" v-on:change="search">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="checkbox">
+                                Compleet
+                                <input id="filter-status-complete" type="checkbox" v-model="viewModel.status.complete" v-on:change="search">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="checkbox">
+                                Geactiveerd
+                                <input id="filter-status-activated" type="checkbox" v-model="viewModel.status.activated" v-on:change="search">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="checkbox">
+                                On hold
+                                <input id="filter-status-onHold" type="checkbox" v-model="viewModel.status.onHold" v-on:change="search">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="checkbox">
+                                Tweede controle afgekeurd
+                                <input id="filter-status-secondCheckDeclined" type="checkbox" v-model="viewModel.status.secondCheckDeclined" v-on:change="search">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="checkbox">
+                                Offerte verworpen
+                                <input id="filter-status-quote-declined" type="checkbox" v-model="viewModel.status.quoteDeclined" v-on:change="search">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
